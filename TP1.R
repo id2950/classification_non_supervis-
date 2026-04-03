@@ -13,4 +13,15 @@ Fonction_echantillon<-function(n,delta){
   return(echantillon)
 }
 
-echantillon_El = Fonction_echantillon(5,3)
+echantillons_El = Fonction_echantillon(5,3)
+
+K_max=20
+res_CAH<-agnes(echantillons_El, metric = "euclidiean", method="ward")
+cutree_res_CAH<-cutree(res_CAH,k=1:K_max)
+plot(res_CAH, which.plots = 2)
+
+install.packages("mclust")
+library(mclust)
+z<-sapply(1:7, function(k) adjustedRandIndex(echantillons_El$P,cutree_res_CAH[,k]))
+aricode
+plot(z)
